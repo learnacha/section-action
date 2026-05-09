@@ -29,6 +29,8 @@ jobs:
         run: npm test
   build:
     runs-on: ubuntu-latest
+    outputs:
+      output-file: ${{ steps.publish.outputs.build-artifact }}
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -40,6 +42,9 @@ jobs:
         run: npm ci
       - name: Build project
         run: npm run build
+      - name: Publish build artifact
+        id: publish
+        run: find dist/assets/*.js -type f -execdir echo "build-artifact={}" >> $GITHUB_OUTPUT ';'
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:

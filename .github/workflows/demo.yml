@@ -69,6 +69,6 @@ jobs:
       - name: Output build files
         run: ls -la
       - name: Output build artifact
-        run: echo "Build artifact: ${{ needs.build.outputs.output-file }}"
+        run: 'echo "Build artifact: ${{ needs.build.outputs.output-file }}"'
       - name: Deploy
         run: echo "Deploying app .."
